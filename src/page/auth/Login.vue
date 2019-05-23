@@ -32,7 +32,37 @@
         data() {
             return {
                 rulesForm: {},
-                formRules: {}
+                formRules: {
+                    userName:[
+                        {
+                            required: true,
+                            message: "请输入用户名称",
+                            trigger: "blur"
+                        },
+                    ],
+                    password:[
+                        {
+                            required:true,
+                            message: "请输入密码",
+                            trigger:"blur"
+                        }
+                    ]
+                }
+            }
+        },
+        methods:{
+            onSubmit(){
+                var that = this
+                this.$axios.request({
+                    url:"http:127.0.0.1:8888/api/user/login/",
+                    method:"POST",
+                    data:{
+                        userName:this.rulesForm.userName,
+                        password:this.rulesForm.password
+                    }
+                })
+
+
             }
         }
     }

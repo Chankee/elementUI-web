@@ -33,6 +33,16 @@
     export default {
         name: "register",
         data() {
+            var checkPwd = (rule, value, callback) => {
+                if (value === '') {
+	                  callback(new Error('请再次输入密码'));
+                } else if (value !== this.rulesForm.password) {
+	                  callback(new Error('两次输入密码不一致!'));
+                } else {
+	                  callback();
+                }
+	          };
+
             return {
                 rulesForm: {},
                 formRules: {
@@ -66,9 +76,54 @@
                             message: '邮箱格式不正确'
                         }
                     ],
+                    checkPwd:[
+                        {
+                            required:true,
+                            validator:checkPwd,
+                            trigger:"blur"
+                        }
+                    ]
 
                 }
             }
+        },
+        methods:{
+
+            onSubmit(){
+                var that = this;
+                this.$refs.rulesForm.validate((valid) => {
+                    if (valid) {
+                      this.$axios.request({
+                          url:"http://127.0.0.1:8888/api/user/register/",
+                          method:"POST",
+                          data:{
+                              username:this.rulesForm.userName,
+                              password:this.rulesForm.password,
+                              confirm_pwd:this.rulesForm.checkPwd,
+                              email:this.rulesForm.userEmail
+                          },
+                          headers:{
+                              'Content-Type':'application/json',
+                          }
+                      }).then(function(arg){
+                          if (arg['status']) {
+
+                              that.$router.push('/login')
+                          } else {
+                              this.$message.error({
+                                  message: arg["msg"],
+                                  duration: arg["code"],
+                                  center: true
+                              })
+                          }
+                      })
+                  }  else {
+                          console.log('error submit!!');
+                          return false;
+                      }
+              });
+
+          }
         }
     }
 </script>

@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Register from '@/page/auth/Register'
 import Login from '@/page/auth/Login'
 import Forget from '@/page/auth/Forget'
+import Container from "@/page/home/Container";
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path:'/forget',
       name:'Forget',
       component:Forget
+    },
+    {
+      path:'/home',
+      name:"Home",
+      component:Container
     }
   ]
 })
