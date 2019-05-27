@@ -22,8 +22,15 @@
         </el-header>
 
         <el-container>
-            <el-aside style="width: 202px">
-
+            <el-aside style="width: 200px">
+                  <el-menu>
+                        <el-menu-item index="ProjectList">
+                            <i class="iconfont" style="float: left" >&#xe615;</i>&nbsp;&nbsp;首  页
+                        </el-menu-item>
+                        <el-menu-item v-for="item in menu_title" :key="index">
+                            <span class="iconfont" v-html="item.code"></span>&nbsp;&nbsp;{{item.name}}
+                        </el-menu-item>
+                  </el-menu>
             </el-aside>
 
             <el-main>
@@ -35,7 +42,19 @@
 
 <script>
     export default {
-        name: "header"
+        name: "header",
+        data(){
+            return {
+                title: [
+
+                ],
+                menu_title:[
+                  {name:"项目管理",code:"&#xe63a"},
+                  {name:"测试用例",code:"&#xe607"},
+                  {name:"测试报告",code:"&#xe604"},
+                ],
+            }
+        }
     }
 </script>
 
@@ -56,8 +75,14 @@
         color: rgb(255, 255, 255);
         margin-top: 10px;
     }
+    .el-menu{
+        background: white;
+    }
     .iconfont{
         color: #165aaa;
         font-size: 25px;
+    }
+    .el-menu-item .iconfont{
+        float: left;
     }
 </style>

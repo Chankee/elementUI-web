@@ -52,17 +52,36 @@
         },
         methods:{
             onSubmit(){
-                var that = this
-                this.$axios.request({
-                    url:"http:127.0.0.1:8888/api/user/login/",
-                    method:"POST",
-                    data:{
-                        userName:this.rulesForm.userName,
-                        password:this.rulesForm.password
+                var that = this;
+                this.$refs.rulesForm.validate((valid) => {
+                    if (valid) {
+                        this.$axios.request({
+                            url: "http://127.0.0.1:8888/api/user/login/",
+                            method: "POST",
+                            data: {
+                                username: this.rulesForm.userName,
+                                password: this.rulesForm.password
+                            },
+                            headers: {
+                                'Content-Type': 'application/json',
+                            }
+                        }).then(function (res) {
+                                if (res['status']){
+                                      that.$store.state.token = res['token'];
+                                      that.$store.state.userName = that.username
+                                }else {
+                                    this.$message.error({
+                                        message: res["msg"],
+                                        duration: res["code"],
+                                        center: true
+                                    })
+                                }
+                            })
+                    } else {
+                         console.log('error submit!!');
+                         return false;
                     }
                 })
-
-
             }
         }
     }

@@ -8,16 +8,18 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'styles/iconfont.css'
 import {Message} from 'element-ui';
+import store from './store/store'
 
-Vue.config.productionTip = false
-Vue.use(ElementUI)
+Vue.config.productionTip = false ;
+Vue.use(ElementUI) ;
 
-Vue.prototype.$axios = axios
+Vue.prototype.$axios = axios ;
 Vue.prototype.$message = Message;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
-})
+});

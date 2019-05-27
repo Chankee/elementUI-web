@@ -105,14 +105,14 @@
                           headers:{
                               'Content-Type':'application/json',
                           }
-                      }).then(function(arg){
-                          if (arg['status']) {
+                      }).then(function(res){
+                          if (res['status']) {
 
                               that.$router.push('/login')
                           } else {
                               this.$message.error({
-                                  message: arg["msg"],
-                                  duration: arg["code"],
+                                  message: res["msg"],
+                                  duration: res["code"],
                                   center: true
                               })
                           }
