@@ -106,7 +106,7 @@
                               'Content-Type':'application/json',
                           }
                       }).then(function(res){
-                          if (res['status']) {
+                          if (res.data.status) {
 
                               that.$router.push('/login')
                           } else {

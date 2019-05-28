@@ -66,9 +66,9 @@
                                 'Content-Type': 'application/json',
                             }
                         }).then(function (res) {
-                                if (res['status']){
-                                      that.$store.state.token = res['token'];
-                                      that.$store.state.userName = that.username
+                                if (res.data.status){
+                                    that.$store.commit('saveToken',{token:res.data.token,username:res.data.user});
+                                    that.$router.push('/home')
                                 }else {
                                     this.$message.error({
                                         message: res["msg"],
@@ -88,5 +88,5 @@
 </script>
 
 <style>
-    @import "../../assets/styles/auth.css"
+    @import "../../assets/styles/auth.css";
 </style>

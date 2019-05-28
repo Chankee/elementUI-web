@@ -13,7 +13,7 @@
                  </el-breadcrumb>
             </div>
             <el-dropdown  @command="userEdit">
-                 <span class="el-dropdown-link">{{userName}}<i class="iconfont">&#xe623</i></span>
+                 <span class="el-dropdown-link" style="font-size: 20px;color: #1c5aaa"><i class="iconfont">&#xe623</i>&nbsp;&nbsp;{{username}}</span>
                      <el-dropdown-menu slot="dropdown" style="line-height:10px">
                           <el-dropdown-item command="changePwd">修改密码</el-dropdown-item>
                           <el-dropdown-item command="logout">退出系统</el-dropdown-item>
@@ -45,6 +45,7 @@
         name: "header",
         data(){
             return {
+                username:this.$store.state.username,
                 title: [
 
                 ],
@@ -53,6 +54,25 @@
                   {name:"测试用例",code:"&#xe607"},
                   {name:"测试报告",code:"&#xe604"},
                 ],
+            }
+        },
+        methods:{
+            userEdit(command){
+                if (command === 'logout'){
+                    this.$axios.request({
+                            url: "http://127.0.0.1:8888/api/user/login/",
+                            method: "GET",
+                            data: {
+                                username: this.$store.state.username,
+                                token: this.$store.state.token,
+                            },
+                            headers: {
+                                'Content-Type': 'application/json',
+                            }
+                        }).then(function (res) {
+                              this.$store.commit("clearToken")
+                            })
+                }
             }
         }
     }
