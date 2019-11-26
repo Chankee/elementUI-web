@@ -4,11 +4,11 @@
           <div class="submit_form" style="padding: 30px 30px">
                 <el-form ref="rulesForm" :rules="formRules" :model="rulesForm" >
                       <el-form-item  prop="userName">
-                            <label><i class="iconfont">&#xe623</i></label>
+                            <label><i class="iconfont">&#xe623;</i></label>
                             <el-input v-model="rulesForm.userName"  placeholder="请输入账号" class="el-inp"/>
                       </el-form-item>
                       <el-form-item  prop="password">
-                            <label><i class="iconfont">&#xe628</i></label>
+                            <label><i class="iconfont">&#xe628;</i></label>
                             <el-input v-model="rulesForm.password" placeholder="请输入密码" class="el-inp" show-password/>
                       </el-form-item>
 

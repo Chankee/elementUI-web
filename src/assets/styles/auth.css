@@ -5,7 +5,7 @@ html,body{
       height:100%;
 	    width:100%;
       background:url("../../assets/backgroud.jpg") no-repeat center;
-      background-size: 100%;
+      /* background-size: 100%; */
       overflow:hidden;
 }
 .login{
